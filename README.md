@@ -1,25 +1,19 @@
 # Numora
-A lightweight web app that explores datasets
+A lightweight terminal app that explores datasets
 
 ## Installation
 
 ### Compilation
 Open your terminal, then:
 ```bash
-g++ numora1.cpp -o numora
+g++ numora.cpp -o numora
 ```
 
 ### Run numora:
-
-Windows (command prompt):
 ```cmd
 ./numora 
 ```
-Windows (powershell):
+or on windows:
 ```powershell
 ./numora.exe
-```
-macOS / Linux:
-```bash
-./numora.out
 ```
