@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Numora</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Numora</h1>
+      <p class="subtitle">Quick dataset summary</p>
+
+      <label for="numbers">Numbers</label>
+      <textarea id="numbers" rows="8" placeholder="12 15 18 20 22 25 100"></textarea>
+
+      <div class="actions">
+        <button id="run">Calculate</button>
+        <button id="sample" class="secondary">Load sample</button>
+      </div>
+
+      <div id="output" class="output" aria-live="polite">
+        Enter numbers and click calculate.
+      </div>
+
+      <p class="download-link">
+        <a href="https://raw.githubusercontent.com/rakazenmun/numora/main/numora.cpp">Download C++ source</a>
+      </p>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
