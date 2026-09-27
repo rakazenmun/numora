@@ -43,6 +43,7 @@ textarea {
   display: flex;
   gap: 12px;
   margin-top: 16px;
+  flex-wrap: wrap;
 }
 
 button {
@@ -58,6 +59,11 @@ button {
 button.secondary {
   background: #e9eef8;
   color: #24364d;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .output {
