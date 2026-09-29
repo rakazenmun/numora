@@ -1,0 +1,46 @@
+name: Build Numora WASM
+
+on:
+  push:
+    branches: [ main, master, wasm-web-ui ]
+  pull_request:
+    branches: [ main, master, wasm-web-ui ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake python3 python3-pip git
+
+      - name: Install Emscripten
+        run: |
+          set -euo pipefail
+          git clone https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          source ./emsdk_env.sh
+          cd ..
+
+      - name: Build numora.js
+        run: |
+          set -euo pipefail
+          source emsdk/emsdk_env.sh
+          chmod +x build.sh || true
+          ./build.sh
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: numora-wasm
+          path: |
+            numora.js
+            numora.wasm
