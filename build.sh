@@ -13,7 +13,7 @@ em++ numora.cpp \
   -s WASM=1 \
   -s MODULARIZE=1 \
   -s EXPORT_NAME='createNumoraModule' \
-  -s EXPORTED_RUNTIME_METHODS='["ccall","cwrap","UTF8ToString","_free"]' \
+  -s EXPORTED_RUNTIME_METHODS='["ccall","cwrap","UTF8ToString"]' \
   -s EXPORTED_FUNCTIONS='["_compute_stats","_free"]' \
   -o numora.js
 
