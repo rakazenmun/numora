@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if ! command -v emcc >/dev/null 2>&1; then
+if ! command -v em++ >/dev/null 2>&1; then
   echo "emscripten is required: https://emscripten.org/docs/getting_started/downloads.html"
   exit 1
 fi
 
-eval "$(/usr/bin/env emcc --show-config 2>/dev/null | head -n 1 || true)" >/dev/null 2>&1 || true
+eval "$(/usr/bin/env em++ --show-config 2>/dev/null | head -n 1 || true)" >/dev/null 2>&1 || true
 
-emcc numora.cpp \
+em++ numora.cpp \
   -O2 \
   -s WASM=1 \
   -s MODULARIZE=1 \
