@@ -7,6 +7,9 @@ on:
     branches: [ main, master, wasm-web-ui ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,6 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install dependencies
         run: |
@@ -36,6 +41,22 @@ jobs:
           source emsdk/emsdk_env.sh
           chmod +x build.sh || true
           ./build.sh
+
+      - name: Commit generated WASM artifacts
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- numora.js numora.wasm; then
+            echo "No WASM artifacts changed."
+            exit 0
+          fi
+
+          git add numora.js numora.wasm
+          git commit -m "chore: update wasm artifacts"
+          git push origin HEAD:${GITHUB_REF_NAME}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
